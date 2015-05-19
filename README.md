@@ -1,9 +1,10 @@
 # Spherical Mercator projection for matplotlib
 
 ## Prerequisites
-1. matplotlib
-2. numpy
-3. gdal (optional, for clipping shapefiles)
+1. matplotlib [http://matplotlib.org]
+2. numpy [http://numpy.org]
+3. pyshp [https://github.com/GeospatialPython/pyshp]
+4. gdal (optional, for clipping shapefiles)
 
 ## Installation
 An installation script is not yet available. To install this package, just
