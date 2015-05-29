@@ -61,8 +61,11 @@ class MercatorAxes(Axes):
         ----------
         filename : str
             ESRI shapefile (located under data/) to use for the coastline.
-        sea : color, optional, default: lightblue
+        sea : color, optional, default: 'lightblue'
             Background fill color (sea color).
+        zorder: int, optional, default: -1
+            Place of the coastline polygons in the drawing order. Use positive
+            values to make filled land polygons overlap data.
 
         Other parameters
         ----------------
@@ -72,8 +75,9 @@ class MercatorAxes(Axes):
         sea = kwargs.pop('sea', 'lightblue')
         if sea:
             self.set_axis_bgcolor(sea)
+        zorder = kwargs.pop('zorder', -1)
 
-        coastline = Coastline(filename, **kwargs)
+        coastline = Coastline(filename, zorder=zorder, **kwargs)
         self.add_patch(coastline)
 
     def get_fig_ratio(self, position=None):
