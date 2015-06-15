@@ -75,8 +75,8 @@ class MercatorAxes(Axes):
         sea = kwargs.pop('sea', 'lightblue')
         if sea:
             self.set_axis_bgcolor(sea)
-        zorder = kwargs.pop('zorder', -1)
 
+        zorder = kwargs.pop('zorder', -1)
         coastline = Coastline(filename, zorder=zorder, **kwargs)
         self.add_patch(coastline)
 

@@ -67,7 +67,8 @@ plt.title("Places where I've been")
 data = np.genfromtxt('places.txt', delimiter=',', usecols=(0,1,2), dtype=None)
 for lat, lon, name in data:
     plt.plot(lon, lat, 'r', marker=mercator.marker.pin, ms=25)
-    plt.annotate(name, xy=[lon,lat], xytext=(0, -15), textcoords='offset points', ha='center')
+    plt.annotate(name, xy=[lon,lat], xytext=(0, -15),
+                 textcoords='offset points', ha='center')
 
 plt.savefig('places.pdf')
 plt.show()

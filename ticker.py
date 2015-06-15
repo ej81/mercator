@@ -25,7 +25,11 @@ class DegreeFormatter(Formatter):
             Express axis scales in degrees and arcminutes instead of in decimal
             degrees.
         """
-        Formatter.__init__(self)
+        try:
+            Formatter.__init__(self)
+        except AttributeError:
+            pass
+
         self.labels = kwargs.pop('labels', None)
         self.minutes = kwargs.pop('minutes', False)
 
@@ -37,7 +41,7 @@ class DegreeFormatter(Formatter):
         elif not self.minutes or mnt == 0:
             return '%g%s%s' % (abs(x), unichr(176), self.labels[0 if x < 0 else 1])
         else:
-            return "%d%s%g\'%s" % (int(abs(x)), unichr(176), mnt, self.labels[0 if x < 0 else 1])
+            return "%d%s%g'%s" % (int(abs(x)), unichr(176), mnt, self.labels[0 if x < 0 else 1])
 
 class MinuteLocator(MaxNLocator):
     """

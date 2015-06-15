@@ -46,6 +46,12 @@ class MercatorScale(ScaleBase):
             Transform.__init__(self)
             self.maxlat = maxlat
 
+        def transform(self, lat):
+            try:
+                return Transform.transform(self, lat)
+            except NotImplementedError:
+                return self.transform_non_affine(lat)
+
         def transform_non_affine(self, lat):
             lat = np.ma.masked_where((lat < -self.maxlat) | (lat > self.maxlat), lat)
             if not lat.mask.any():
@@ -64,6 +70,12 @@ class MercatorScale(ScaleBase):
         def __init__(self, maxlat):
             Transform.__init__(self)
             self.maxlat = maxlat 
+
+        def transform(self, lat):
+            try:
+                return Transform.transform(self, lat)
+            except NotImplementedError:
+                return self.transform_non_affine(lat)
 
         def transform_non_affine(self, y):
             return np.degrees(np.arctan(np.sinh(np.radians(y))))
