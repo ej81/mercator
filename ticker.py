@@ -53,4 +53,4 @@ class MinuteLocator(MaxNLocator):
         Create a new locator instance.
         """
         # Select divisions that are round minutes
-        MaxNLocator.__init__(self, nbins=9, steps=[1, 5/3., 10/3., 5, 10])
+        MaxNLocator.__init__(self, nbins=8, steps=[1, 5/3., 10/3., 5, 10])
