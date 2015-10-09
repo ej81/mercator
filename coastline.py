@@ -11,8 +11,6 @@ from matplotlib.transforms import Bbox
 from matplotlib.path import Path
 from matplotlib.patches import Polygon
 
-import unittest
-
 class Coastline(Polygon):
     """
     Coastline background polygon. Clips itself to the axes when drawn.
