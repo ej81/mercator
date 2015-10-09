@@ -96,7 +96,9 @@ class MercatorAxes(Axes):
         Change the axes bounds to achieve the desired aspect ratio.
         """
         aspect = self.get_aspect()
-        if aspect == 'equal':
+        if aspect == 'auto':
+            return
+        elif aspect == 'equal':
             aspect = 1
 
         xtrans = self.xaxis.get_transform()
