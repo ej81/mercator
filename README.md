@@ -7,38 +7,18 @@
 4. gdal (optional, for clipping shapefiles)
 
 ## Installation
-An installation script is not yet available. To install this package, just
-download the source with ```git clone https://github.com/ej81/mercator.git```.
-Place the directory ```mercator/``` directly inside the project that you are
-working on or set the environment variable ```$PYTHONPATH``` to point to it.
+To install the package, clone the reposotory and use the ```setup.py``` script:
 
-For example:
 ```
-mkdir $HOME/python
-cd $HOME/python
 git clone https://github.com/ej81/mercator.git
-export PYTHONPATH=$HOME/python:$PYTHONPATH
+cd mercator
+python setup.py install
 ```
 
-## Map data
-In order to display the coastline in your figures, you need to download the
-GSHHS database in ESRI shapefile format from
-[http://www.soest.hawaii.edu/pwessel/gshhg/]. The files should be placed inside
-the package directory in the subdirectory `data/`. 
-
-If you are only interested in a small region, performance can be increased by
-clipping the shapefiles to roughly the correct area. For example for the
-Mediterranean Sea you can do:
-
+To automatically download the coastlines you can do:
 ```
-for res in f h l i c; do
-  ogr2ogr medsea_${res}.shp ${res}/GSHHS_${res}_L1.shp -clipsrc -20 15 50 60
-done
+python -c 'import mercator.data; mercator.data.download()'
 ```
-
-Then you can do ```ax.coastline('medsea_f.shp')``` instead of
-```ax.coastline('GSHHS_f_L1.shp')```. Especially for the higher resolutions
-this should make a big difference.
 
 ## Examples
 

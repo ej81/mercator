@@ -7,9 +7,37 @@ import os
 import shapefile
 import warnings
 import numpy as np
-from matplotlib.transforms import Bbox
 from matplotlib.path import Path
 from matplotlib.patches import Polygon
+
+
+def _find(name, path):
+    if os.path.isfile(os.path.join(path, name)):
+        return os.path.join(path, name)
+    else:
+        name = os.path.basename(name)
+        for root, dirs, files in os.walk(path):
+            if name in files:
+                return os.path.join(root, name)
+    return None
+
+
+def _split(points, parts):
+    num = len(parts)
+
+    if num > 1:
+        result = []
+        for index in range(0, num):
+            start = parts[index]
+            if index < num-1:
+                end = parts[index+1]
+            else:
+                end = -1
+            result += [points[start:end]]
+        return result
+    else:
+        return [points]
+
 
 class Coastline(Polygon):
     """
@@ -48,40 +76,14 @@ class Coastline(Polygon):
         Polygon.__init__(self, xy, edgecolor=color, facecolor=land, **kwargs)
 
         datapath = os.path.join(os.path.dirname(__file__), 'data')
-        coastfile = self._find(filename, datapath)
+        coastfile = _find(filename, datapath)
         if coastfile:
             file = shapefile.Reader(coastfile)
             for shape in file.shapes():
-                for points in self._split(shape.points, shape.parts):
+                for points in _split(shape.points, shape.parts):
                     self.data += [Path(points)]
         else:
-            warnings.warn('file %s could not be found in %s' % (filename, datapath))
-
-    def _find(self, name, path):
-        if os.path.isfile(os.path.join(path, name)):
-            return os.path.join(path, name)
-        else:
-            name = os.path.basename(name)
-            for root, dirs, files in os.walk(path):
-                if name in files:
-                    return os.path.join(root, name)
-        return None
-
-    def _split(self, points, parts):
-        num = len(parts)
-
-        if num > 1:
-            result = []
-            for index in range(0, num):
-                start = parts[index]
-                if index < num-1:
-                    end = parts[index+1]
-                else:
-                    end = -1
-                result += [points[start:end]]
-            return result
-        else:
-            return [points]
+            raise Warning('coastline "%s" not found in directory "%s"' % (filename, datapath))
 
     def draw(self, renderer):
         """

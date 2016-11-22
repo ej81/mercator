@@ -10,5 +10,6 @@ from scale import MercatorScale
 from axes import MercatorAxes
 from marker import pin
 
+
 register_projection(MercatorAxes)
 register_scale(MercatorScale)

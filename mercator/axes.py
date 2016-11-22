@@ -4,13 +4,12 @@ __author__ = "Eric Jansen"
 __email__ = "eric.jansen@cmcc.it"
 
 import math
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.ticker import AutoLocator
 
 from ticker import DegreeFormatter, MinuteLocator
-from scale import MercatorScale 
 from coastline import Coastline
+
 
 class MercatorAxes(Axes):
     name = 'mercator'
@@ -21,7 +20,7 @@ class MercatorAxes(Axes):
 
         Parameters
         ----------
-        maxlat : float, optional, default: 85
+        maxlat : float, optional, default: 85.0511287798066
             Largest latitude allowed to be drawn. In the Mercator projection a
             latitude of 90 degrees transforms into infinity. To avoid drawing
             issues, all values outside of a predefined range [-maxlat, maxlat]
@@ -35,7 +34,7 @@ class MercatorAxes(Axes):
         kwargs : axes properties
             Passed on to :class:`~matplotlib.Axes`.
         """
-        self.maxlat = kwargs.pop('maxlat', 85)
+        self.maxlat = kwargs.pop('maxlat', 85.0511287798066)
         self.minutes = kwargs.pop('minutes', False)
 
         Axes.__init__(self, *args, **kwargs)
@@ -89,7 +88,7 @@ class MercatorAxes(Axes):
         xsize, ysize = position.size
         width, height = self.get_figure().get_size_inches()
 
-        return (ysize / xsize) * (height / width)
+        return (xsize / ysize) * (width / height)
 
     def apply_aspect(self, position=None):
         """
@@ -110,7 +109,7 @@ class MercatorAxes(Axes):
         xsize = max(math.fabs(xmax - xmin), 1e-30)
         ysize = max(math.fabs(ymax - ymin), 1e-30)
 
-        factor = ysize / xsize / self.get_fig_ratio(position)
+        factor = (self.get_fig_ratio(position) * aspect) / (xsize / ysize)
 
         if (self._autoscaleXon and factor >= 1) or not self._autoscaleYon or self in self._shared_y_axes:
             xmin -= (xsize * (factor - 1))/2

@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
-from scale import MercatorScale
+from mercator.scale import MercatorScale
+
 
 class MercatorScaleTest(unittest.TestCase):
 
@@ -18,5 +19,3 @@ class MercatorScaleTest(unittest.TestCase):
         for lat1, lat2 in zip(original, inverse):
             self.assertAlmostEqual(lat1, lat2)
 
-if __name__ == '__main__':
-    unittest.main()

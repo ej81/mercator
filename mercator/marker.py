@@ -5,6 +5,7 @@ __email__ = "eric.jansen@cmcc.it"
 
 from matplotlib.path import Path
 
+
 pin = Path([[-1.0, 2.0],
             [-1.0, 2.55], [-0.55, 3.0], [0.0, 3.0], 
             [0.55, 3.0], [1.0, 2.55], [1.0, 2.0], 

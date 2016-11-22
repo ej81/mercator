@@ -6,6 +6,7 @@ __email__ = "eric.jansen@cmcc.it"
 import math
 from matplotlib.ticker import Formatter, MaxNLocator
 
+
 class DegreeFormatter(Formatter):
     """
     Formatter for latitude/longitude values.
@@ -42,6 +43,7 @@ class DegreeFormatter(Formatter):
             return '%g%s%s' % (abs(x), unichr(176), self.labels[0 if x < 0 else 1])
         else:
             return "%d%s%g'%s" % (int(abs(x)), unichr(176), mnt, self.labels[0 if x < 0 else 1])
+
 
 class MinuteLocator(MaxNLocator):
     """

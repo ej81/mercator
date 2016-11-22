@@ -9,6 +9,7 @@ from matplotlib.transforms import Transform
 from matplotlib.scale import ScaleBase
 from ticker import DegreeFormatter
 
+
 class MercatorScale(ScaleBase):
     name = 'mercator'
 
@@ -18,14 +19,14 @@ class MercatorScale(ScaleBase):
 
         Parameters
         ----------
-        maxlat : float, optional, default: 85
+        maxlat : float, optional, default: 85.0511287798066
             Largest latitude allowed to be drawn. In the Mercator projection a
             latitude of 90 degrees transforms into infinity. To avoid drawing
             issues, all values outside of a predefined range [-maxlat, maxlat]
             will be masked.
         """
         ScaleBase.__init__(self)
-        self.maxlat = kwargs.pop('maxlat', 85)
+        self.maxlat = kwargs.pop('maxlat', 85.0511287798066)
 
     def get_transform(self):
         return self.MercatorLatitudeTransform(self.maxlat)
