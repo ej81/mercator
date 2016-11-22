@@ -9,7 +9,7 @@ setup(name='mercator',
       author_email='eric.jansen@cmcc.it',
       license='BSD',
       packages=find_packages(),
-      install_requires=['matplotlib>=1.3.1', 'pyshp'],
+      install_requires=['matplotlib>=1.3.1', 'numpy>=1.5', 'pyshp'],
       test_suite='nose.collector',
       tests_require=['nose'])
 
