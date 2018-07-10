@@ -73,7 +73,12 @@ class MercatorAxes(Axes):
         """
         sea = kwargs.pop('sea', 'lightblue')
         if sea:
-            self.set_axis_bgcolor(sea)
+            try:
+                # matplotlib >= 2.0
+                self.set_facecolor(sea)
+            except AttributeError:
+                # matplotlib < 2.0
+                self.set_axis_bgcolor(sea)
 
         zorder = kwargs.pop('zorder', -1)
         coastline = Coastline(filename, zorder=zorder, **kwargs)
