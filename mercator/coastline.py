@@ -1,7 +1,7 @@
 """Coastline polygons read from an ESRI shapefile, for plotting with matplotlib."""
 
 __author__ = "Eric Jansen"
-__email__ = "eric.jansen@cmcc.it"
+__email__ = "eric@xyrion.org"
 
 import os
 import shapefile

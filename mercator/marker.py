@@ -1,7 +1,7 @@
 """Google Maps style pin marker for matplotlib."""
 
 __author__ = "Eric Jansen"
-__email__ = "eric.jansen@cmcc.it"
+__email__ = "eric@xyrion.org"
 
 from matplotlib.path import Path
 

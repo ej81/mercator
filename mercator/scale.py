@@ -1,13 +1,13 @@
 """Axis transform for spherical Mercator projection in matplotlib."""
 
 __author__ = "Eric Jansen"
-__email__ = "eric.jansen@cmcc.it"
+__email__ = "eric@xyrion.org"
 
 import numpy as np
 from matplotlib.ticker import AutoLocator
 from matplotlib.transforms import Transform
 from matplotlib.scale import ScaleBase
-from ticker import DegreeFormatter
+from .ticker import DegreeFormatter
 
 
 class MercatorScale(ScaleBase):

@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 """Axis label formatter for latitude/longitude (decimal or minutes)."""
 
 __author__ = "Eric Jansen"
-__email__ = "eric.jansen@cmcc.it"
+__email__ = "eric@xyrion.org"
 
 import math
 from matplotlib.ticker import Formatter, MaxNLocator
@@ -38,11 +39,11 @@ class DegreeFormatter(Formatter):
         dec = abs(x) % 1
         mnt = dec * 60 if dec > 1e-10 else 0
         if x == 0 or self.labels == None:
-            return '%g%s' % (x, unichr(176))
+            return u'%g°' % x
         elif not self.minutes or mnt == 0:
-            return '%g%s%s' % (abs(x), unichr(176), self.labels[0 if x < 0 else 1])
+            return u'%g°%s' % (abs(x), self.labels[0 if x < 0 else 1])
         else:
-            return "%d%s%g'%s" % (int(abs(x)), unichr(176), mnt, self.labels[0 if x < 0 else 1])
+            return u"%d°%g'%s" % (int(abs(x)), mnt, self.labels[0 if x < 0 else 1])
 
 
 class MinuteLocator(MaxNLocator):

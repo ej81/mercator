@@ -1,12 +1,17 @@
 import os
 import sys
-import urllib
 import zipfile
+
+try:
+    from urllib import urlretrieve
+except ImportError:
+    from urllib.request import urlretrieve
 
 
 DEFAULT_SOURCE= [
     'http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.4.zip',
-    'http://ej81.github.io/mercator/medsea_shp.zip'
+    'http://ej81.github.io/mercator/medsea_shp.zip',
+    'http://ej81.github.io/mercator/blacksea_shp.zip'
 ]
 
 
@@ -44,11 +49,11 @@ def download(source=None):
 
         try:
             sys.stdout.write('%-72s ' % url)
-            filename, response = urllib.urlretrieve(url, reporthook=_progress)
-            if response.status != '':
+            filename, response = urlretrieve(url, reporthook=_progress)
+            if getattr(response, 'status', '') != '':
                 error = response.status
         except Exception as e:
-            error = e.message
+            error = str(e)
         finally:
             sys.stdout.write('\n')
         
@@ -61,7 +66,7 @@ def download(source=None):
             archive.extractall(path)
             archive.close()
         except Exception as e:
-            raise Warning('could not unpack "%s": %s' % (url, e.message))
+            raise Warning('could not unpack "%s": %s' % (url, e))
         finally:
             if filename:
                 os.unlink(filename)

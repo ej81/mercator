@@ -1,14 +1,14 @@
 """Implementation of a spherical Mercator projection in matplotlib."""
 
 __author__ = "Eric Jansen"
-__email__ = "eric.jansen@cmcc.it"
+__email__ = "eric@xyrion.org"
 
 import math
 from matplotlib.axes import Axes
 from matplotlib.ticker import AutoLocator
 
-from ticker import DegreeFormatter, MinuteLocator
-from coastline import Coastline
+from .ticker import DegreeFormatter, MinuteLocator
+from .coastline import Coastline
 
 
 class MercatorAxes(Axes):
