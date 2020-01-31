@@ -25,7 +25,10 @@ class MercatorScale(ScaleBase):
             issues, all values outside of a predefined range [-maxlat, maxlat]
             will be masked.
         """
-        ScaleBase.__init__(self)
+        try:
+            ScaleBase.__init__(self)
+        except TypeError:
+            ScaleBase.__init__(self, axis)
         self.maxlat = kwargs.pop('maxlat', 85.0511287798066)
 
     def get_transform(self):
