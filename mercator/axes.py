@@ -116,12 +116,12 @@ class MercatorAxes(Axes):
 
         factor = (self.get_fig_ratio(position) * aspect) / (xsize / ysize)
 
-        if (self._autoscaleXon and factor >= 1) or not self._autoscaleYon or self in self._shared_y_axes:
+        if (self.get_autoscalex_on() and factor >= 1) or not self.get_autoscaley_on() or self in self.get_shared_y_axes():
             xmin -= (xsize * (factor - 1))/2
             xmax += (xsize * (factor - 1))/2
             self.set_xbound(xtrans.inverted().transform(xmin),
                             xtrans.inverted().transform(xmax))
-        elif (self._autoscaleYon and factor < 1) or not self._autoscaleXon or self in self._shared_x_axes:
+        elif (self.get_autoscaley_on() and factor < 1) or not self.get_autoscalex_on() or self in self.get_shared_x_axes():
             factor = 1/factor
             ymin -= (ysize * (factor - 1))/2
             ymax += (ysize * (factor - 1))/2
